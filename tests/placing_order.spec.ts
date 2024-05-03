@@ -14,9 +14,15 @@ test.describe('Regression', () => {
         await login.gotoLoginPage();
         await login.login('standard_user', 'secret_sauce');
     })
-    test('User adds fleece jacket to the cart and checks out', async ({ page }) => {
+    test('User is able to see item details', async ({ page }) => {
+        const inventoryTShirt = new Inventory(page);
+        await inventoryTShirt.getItemByLabel('Sauce Labs Bolt T-Shirt')
+        await expect.soft(page.getByText('$15.99').first()).toBeVisible();
+        await expect.soft(page.getByText('Get your testing superhero on')).toBeVisible();
+    })
 
-        //user add fleece jacket to the cart
+    test('User adds fleece jacket to the cart and checks out', async ({ page }) => {
+        //user adds fleece jacket to the cart
         const addJacket = new Inventory(page);
         await addJacket.addItem('Sauce Labs Fleece Jacket');
         await addJacket.clickShoppingCart();
@@ -27,16 +33,16 @@ test.describe('Regression', () => {
         const info = new yourInfo(page);
         await info.enterCustomerInfo('Marco', 'Polo', '92036');
         // verify user is on Overview page
-        await expect(page.locator('//*[@class="title"][@data-test="title"]')).toHaveText('Checkout: Overview');
-        await expect(page.locator('//*[@class="inventory_item_name"][@data-test="inventory-item-name"]')).toHaveText('Sauce Labs Fleece Jacket');
-        await expect(page.locator('//*[@data-test="total-info-label"]')).toHaveText('Price Total');
-        await expect(page.locator('//*[@data-test="total-label"]')).toHaveText('Total: $53.99');
+        await expect(page.getByText('Checkout: Overview')).toBeVisible();
+        await expect(page.getByText('Sauce Labs Fleece Jacket')).toBeVisible();
+        await expect(page.getByText('Price Total')).toBeVisible();
+        await expect(page.getByText('Total: $53.99')).toBeVisible();
         //user click 'Finish'
         const clickFinish = new Overview(page);
         await clickFinish.finishOrder();
         //user is on Complete page
-        await expect(page.locator('[data-test="title"]')).toHaveText('Checkout: Complete!');
-        await expect(page.locator('[data-test="complete-header"]')).toHaveText('Thank you for your order!');
+        await expect(page.getByText('Checkout: Complete!')).toBeVisible();
+        await expect(page.getByText('Thank you for your order!')).toBeVisible();
 
     })
 
@@ -48,31 +54,26 @@ test.describe('Regression', () => {
         await expect(page.locator('//button[text()="Remove"]')).toBeVisible();
         await expect(addBagpack.cartBadge).toContainText("1");
         addBagpack.removeItem('Sauce Labs Backpack');
-        //verify pagpack was removed from a cart
+        //verify bagpack was removed from a cart
         await expect(addBagpack.cartBadge).toBeHidden();
     });
 
 
-    test('User is able to add all items to the cart',async({page}) =>{
-        const allItems = new Inventory(page);
-        await allItems.addAllItemsToCart;
-        await expect(allItems.cartBadge).toContainText('6');
-
+    test('User is able to add all items to the cart', async ({ page }) => {
+        const inventoryAddItems = new Inventory(page);
+        await inventoryAddItems.addAllItemsToCart(page);
+        await expect(inventoryAddItems.cartBadge).toContainText('6');
     })
 
-    // test('testy test',async({page}) =>{
-    //     const productPage = new Inventory(page);
-
-    //     const addToCartButtons = await productPage.getAllAddToCartButtons();
-    
-    //     for (const button of addToCartButtons) {
-    //         await productPage.clickAddToCartButton(button);
-    //     }
-    
-    //    await expect(productPage.cartBadge).toContainText('6');
-
-
-    // })
+    test('User is able to add all items to the cart and remove it', async ({ page }) => {
+        const inventoryRemoveItems = new Inventory(page);
+        //user adds all items to the cart
+        await inventoryRemoveItems.addAllItemsToCart(page);
+        await expect(inventoryRemoveItems.cartBadge).toContainText('6');
+        //user removes all items from the cart
+        await inventoryRemoveItems.removeAllItemsFromCart(page);
+        await expect(inventoryRemoveItems.cartBadge).toBeHidden();
+    })
 
 
 })
