@@ -1,11 +1,13 @@
 import { Locator, type Page } from "playwright/test";
 
 export class LoginPage {
+
     private page: Page;
     usernameInput: Locator;
     passwordInput: Locator;
     loginButton: Locator;
 
+    
     constructor(page: Page) {
         this.page = page;
         this.usernameInput = page.getByPlaceholder('Username');
@@ -22,4 +24,6 @@ export class LoginPage {
         await this.passwordInput.fill(password);
         await this.loginButton.click();
     }
+
+
 }
