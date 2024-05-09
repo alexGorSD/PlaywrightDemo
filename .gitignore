@@ -19,3 +19,8 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/Users/alexg/Documents/GitHub/Playwright_testing/tests/testy.spec.ts
