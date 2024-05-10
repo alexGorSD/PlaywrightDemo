@@ -44,17 +44,17 @@ export class Inventory {
 
     async removeItem(itemLabel: string) {
         const item = this.getItemByLabel(itemLabel);
-        await item.getByRole("button", { name: 'Remove' }).click();
+        await item.getByRole('button', { name: 'Remove' }).click();
     }
 
     async addAllItemsToCart(page: Page) {
         for (const button of await this.allItems.all()) {
-            await button.getByRole("button", { name: 'Add to cart' }).click();
+            await button.getByRole('button', { name: 'Add to cart' }).click();
         }
     }
     async removeAllItemsFromCart(page: Page) {
         for (const button of await this.allItems.all()) {
-            await button.getByRole("button", { name: 'Remove' }).click();
+            await button.getByRole('button', { name: 'Remove' }).click();
         }
     }
 
