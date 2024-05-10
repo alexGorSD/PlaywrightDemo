@@ -23,7 +23,7 @@ test.describe('Adding & Removing Items From Cart', () => {
         const inventory = new Inventory(page);
         await inventory.addItem('Sauce Labs Backpack');
         //verify user added bagpack
-        await expect(page.locator('//button[text()="Remove"]')).toBeVisible();
+        await expect(inventory.removeFromCartBtn).toBeVisible();
         await expect(inventory.cartBadge).toContainText("1");
         inventory.removeItem('Sauce Labs Backpack');
         //verify bagpack was removed from a cart
