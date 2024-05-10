@@ -14,7 +14,7 @@ export class Overview {
 
     constructor(page: Page) {
         this.page = page;
-        this.finishButton = page.locator('//*[@id="finish"]');
+        this.finishButton = page.getByRole('button', { name: 'Finish' });
         this.payInfoValue = page.locator('//*[@data-test ="payment-info-value"]');
         this.shippingInfoValue = page.locator('//*[@data-test ="shipping-info-value"]');
         this.subtotalValue = page.locator('//*[@data-test="subtotal-label"]');

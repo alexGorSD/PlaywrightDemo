@@ -9,18 +9,16 @@ export class CustomerInfo {
     continueButton: Locator;
     errorBox: Locator;
     cancelBtn: Locator;
-    continueBtn: Locator;
 
 
     constructor(page: Page) {
         this.page = page;
-        this.customerFirstName = page.locator('//*[@id="first-name"]');
-        this.customerLastName = page.locator('//*[@id="last-name"]');
-        this.customerZipCode = page.locator('//*[@id="postal-code"]');
-        this.continueButton = page.locator('//*[@id="continue"]');
+        this.customerFirstName = page.getByPlaceholder('First Name');
+        this.customerLastName = page.getByPlaceholder('Last Name');
+        this.customerZipCode = page.getByPlaceholder('Zip/Postal Code');
+        this.continueButton = page.getByRole('button', { name: 'Continue' });
         this.errorBox = page.locator('//*[@class="error-message-container error"]');
         this.cancelBtn = page.getByRole('button', { name: 'Cancel' });
-        this.continueBtn = page.locator('//*[@id="continue"]');
 
     }
 
@@ -36,7 +34,7 @@ export class CustomerInfo {
     }
 
     async customerInfoContinue() {
-        await this.continueBtn.click();
+        await this.continueButton.click();
     }
 
 

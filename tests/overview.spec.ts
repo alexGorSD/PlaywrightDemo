@@ -29,7 +29,7 @@ test.describe('checking Overview page', () => {
         await expect(overview.totalValue).toHaveText('Total: $17.27');
     })
 
-    test('User is able to click "Cancel" to go back to inventory page1', async ({ page }) => {
+    test('User is able to click "Cancel" to go back to inventory page', async ({ page }) => {
         const overview = new Overview(page);
         await overview.cancelOrder();
         await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
