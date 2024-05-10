@@ -7,11 +7,11 @@ export class CustomerInfo {
     customerLastName: Locator;
     customerZipCode: Locator;
     continueButton: Locator;
-    errorBox:Locator;
-    cancelBtn:Locator;
-    continueBtn:Locator;
+    errorBox: Locator;
+    cancelBtn: Locator;
+    continueBtn: Locator;
 
-    
+
     constructor(page: Page) {
         this.page = page;
         this.customerFirstName = page.locator('//*[@id="first-name"]');
@@ -19,7 +19,7 @@ export class CustomerInfo {
         this.customerZipCode = page.locator('//*[@id="postal-code"]');
         this.continueButton = page.locator('//*[@id="continue"]');
         this.errorBox = page.locator('//*[@class="error-message-container error"]');
-        this.cancelBtn = page.getByRole('button',{name: 'Cancel'});
+        this.cancelBtn = page.getByRole('button', { name: 'Cancel' });
         this.continueBtn = page.locator('//*[@id="continue"]');
 
     }
@@ -31,11 +31,11 @@ export class CustomerInfo {
         this.continueButton.click();
     }
 
-    async customerInfoGoBack(){
+    async customerInfoGoBack() {
         await this.cancelBtn.click();
     }
-    
-    async customerInfoContinue(){
+
+    async customerInfoContinue() {
         await this.continueBtn.click();
     }
 

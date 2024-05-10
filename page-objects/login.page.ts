@@ -7,7 +7,7 @@ export class LoginPage {
     passwordInput: Locator;
     loginButton: Locator;
 
-    
+
     constructor(page: Page) {
         this.page = page;
         this.usernameInput = page.getByPlaceholder('Username');

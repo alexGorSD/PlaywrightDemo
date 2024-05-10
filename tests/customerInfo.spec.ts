@@ -19,33 +19,33 @@ test.describe('checking inventory & Info pages', () => {
     })
 
     test('User is not able to proceed if First Name is missing',async ({page}) =>{
-        const info = new CustomerInfo(page);
-        await info.enterCustomerInfo('', 'Polo', '92036');
-        await expect (info.errorBox).toHaveText('Error: First Name is required');
+        const customerInfo = new CustomerInfo(page);
+        await customerInfo.enterCustomerInfo('', 'Polo', '92036');
+        await expect (customerInfo.errorBox).toHaveText('Error: First Name is required');
     })
 
     test('User is not able to proceed if Last Name is missing',async ({page}) =>{
-        const info = new CustomerInfo(page);
-        await info.enterCustomerInfo('Marco', '', '92036');
-        await expect (info.errorBox).toHaveText('Error: Last Name is required');
+        const customerInfo = new CustomerInfo(page);
+        await customerInfo.enterCustomerInfo('Marco', '', '92036');
+        await expect (customerInfo.errorBox).toHaveText('Error: Last Name is required');
     })
 
     test('User is not able to proceed if Postal Code is missing',async ({page}) =>{
-        const info = new CustomerInfo(page);
-        await info.enterCustomerInfo('Marco', 'Polo', '');
-        await expect (info.errorBox).toHaveText('Error: Postal Code is required');
+        const customerInfo = new CustomerInfo(page);
+        await customerInfo.enterCustomerInfo('Marco', 'Polo', '');
+        await expect (customerInfo.errorBox).toHaveText('Error: Postal Code is required');
     })
 
     test('User is able to click "Cancel" button to go 1 step back',async ({page}) =>{
-        const info = new CustomerInfo(page);
-        await info.customerInfoGoBack();
+        const customerInfo = new CustomerInfo(page);
+        await customerInfo.customerInfoGoBack();
         await expect(page).toHaveURL('https://www.saucedemo.com/cart.html');
     })
 
     test('User is able to click "Continue" to move forward', async ({page}) =>{
-        const info = new CustomerInfo(page);
-        await info.enterCustomerInfo('Marco', 'Polo', '92036');
-        info.customerInfoContinue();
+        const customerInfo = new CustomerInfo(page);
+        await customerInfo.enterCustomerInfo('Marco', 'Polo', '92036');
+        customerInfo.customerInfoContinue();
         await expect(page).toHaveURL('https://www.saucedemo.com/checkout-step-two.html');
 
     })

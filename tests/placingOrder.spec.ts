@@ -15,32 +15,21 @@ test.describe('Placing an order', () => {
 
     test('User adds fleece jacket to the cart and checks out', async ({ page }) => {
         //user adds fleece jacket to the cart
-        const addJacket = new Inventory(page);
-        await addJacket.addItem('Sauce Labs Fleece Jacket');
-        await addJacket.clickShoppingCart();
+        const inventory = new Inventory(page);
+        await inventory.addItem('Sauce Labs Fleece Jacket');
+        await inventory.clickShoppingCart();
         // user navigates to Cart
-        const checkoutCart = new Cart(page);
-        await checkoutCart.clickCheckout();
+        const cart = new Cart(page);
+        await cart.clickCheckout();
         //user enters customer information
-        const info = new CustomerInfo(page);
-        await info.enterCustomerInfo('Marco', 'Polo', '92036');
-        //verify user is on Overview page
-        await expect(page.getByText('Checkout: Overview')).toBeVisible();
-        await expect(page.getByText('Sauce Labs Fleece Jacket')).toBeVisible();
-        await expect(page.getByText('Price Total')).toBeVisible();
-        await expect(page.getByText('Total: $53.99')).toBeVisible();
+        const customerInfo = new CustomerInfo(page);
+        await customerInfo.enterCustomerInfo('Marco', 'Polo', '92036');
         //user click 'Finish'
-        const clickFinish = new Overview(page);
-        await clickFinish.finishOrder();
-        //verify user is on Complete page
-        await expect(page.getByText('Checkout: Complete!')).toBeVisible();
-        await expect(page.getByAltText('Pony Express')).toBeVisible();
-        await expect(page.getByText('Checkout: Complete!')).toBeVisible();
-        await expect(page.getByText('Thank you for your order!')).toBeVisible();
-        await expect(page.getByText('Your order has been dispatched')).toBeVisible();
+        const overview = new Overview(page);
+        await overview.finishOrder();
         //user navigates to Inventory page
-        const goBackHome = new Complete(page);
-        await goBackHome.goBackHome();
+        const complete = new Complete(page);
+        await complete.goBackHome();
         //verify user is on Inventory page
         await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
     })

@@ -15,7 +15,6 @@ export class MenuNav {
         this.aboutBtn = page.locator('//a[text()="About"]');
         this.allItemsBtn = page.locator('//a[text()="All Items"]');
         this.logoutBtn = page.locator('//a[text()="Logout"]');
-
     }
 
     async openMenuNav(page: Page) {
