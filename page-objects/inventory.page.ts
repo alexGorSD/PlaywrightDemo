@@ -1,4 +1,4 @@
-import { Locator, type Page } from "playwright/test";
+import { Locator, type Page, test } from "playwright/test";
 
 export class Inventory {
 
@@ -21,17 +21,20 @@ export class Inventory {
         this.removeFromCartBtn = page.getByRole("button", { name: 'Remove' });
         this.backToProdBtn = page.getByText('Back to products');
         this.price = page.locator(`//*[@class="inventory_item_price"]`);
-
     }
 
     async addItem(itemLabel: string) {
-        const item = this.getItemByLabel(itemLabel);
-        await item.getByRole("button", { name: 'Add to cart' }).click();
+        await test.step(`WHEN user adds ${itemLabel} to the shopping cart`, async () => {
+            const item = this.getItemByLabel(itemLabel);
+            await item.getByRole("button", { name: 'Add to cart' }).click();
+        });
     }
 
     async clickItem(itemLabel: string) {
-        const item = this.getItemByLabel(itemLabel);
-        await item.locator('//div[@class="inventory_item_name "]').click();
+        await test.step(`WHEN user clicks at ${itemLabel} `, async () => {
+            const item = this.getItemByLabel(itemLabel);
+            await item.locator('//div[@class="inventory_item_name "]').click();
+        });
     }
 
     getItemByLabel(itemLabel: string) {
@@ -39,43 +42,53 @@ export class Inventory {
     }
 
     async clickShoppingCart() {
-        await this.shoppingCart.click();
+        await test.step('AND user clicks at shopping cart', async () => {
+            await this.shoppingCart.click();
+        });
     }
 
     async removeItem(itemLabel: string) {
-        const item = this.getItemByLabel(itemLabel);
-        await item.getByRole('button', { name: 'Remove' }).click();
+        await test.step(`AND user removes ${itemLabel} from the cart`, async () => {
+            const item = this.getItemByLabel(itemLabel);
+            await item.getByRole('button', { name: 'Remove' }).click();
+        });
     }
 
     async addAllItemsToCart(page: Page) {
-        for (const button of await this.allItems.all()) {
-            await button.getByRole('button', { name: 'Add to cart' }).click();
-        }
+        await test.step('WHEN user adds all items to the cart', async () => {
+            for (const button of await this.allItems.all()) {
+                await button.getByRole('button', { name: 'Add to cart' }).click();
+            }
+        });
     }
     async removeAllItemsFromCart(page: Page) {
-        for (const button of await this.allItems.all()) {
-            await button.getByRole('button', { name: 'Remove' }).click();
-        }
+        await test.step('AND user removes all items from the cart', async () => {
+            for (const button of await this.allItems.all()) {
+                await button.getByRole('button', { name: 'Remove' }).click();
+            }
+        });
     }
 
     async sortItemsList(page: Page, by: "name asc" | "name desc" | "price asc" | "price desc") {
-        let option = "";
-        switch (by) {
-            case "name asc":
-                option = "az";
-                break;
-            case "name desc":
-                option = "za";
-                break;
-            case "price asc":
-                option = "lohi";
-                break;
-            case "price desc":
-                option = "hilo";
-                break;
-        }
-        await page.selectOption(`//*[@class="product_sort_container"]`, option);
+        await test.step(`WHEN user sorts items by ${by}ending order`, async () => {
+            let option = "";
+            switch (by) {
+                case "name asc":
+                    option = "az";
+                    break;
+                case "name desc":
+                    option = "za";
+                    break;
+                case "price asc":
+                    option = "lohi";
+                    break;
+                case "price desc":
+                    option = "hilo";
+                    break;
+            }
+            await page.selectOption(`//*[@class="product_sort_container"]`, option);
 
+        });
     };
 
 

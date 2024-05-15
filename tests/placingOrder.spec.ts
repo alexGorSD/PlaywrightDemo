@@ -9,8 +9,11 @@ import { Complete } from '../page-objects/complete.page';
 test.describe('Placing an order', () => {
     test.beforeEach(async ({ page }) => {
         const login = new LoginPage(page);
+        const userName = 'standard_user';
+        const password = 'secret_sauce';
+        test.info().annotations.push({ type: 'GIVEN', description: `I'm logged in as ${userName}` });
         await login.gotoLoginPage();
-        await login.login('standard_user', 'secret_sauce');
+        await login.login(userName, password);
     })
 
     test('User adds fleece jacket to the cart and checks out', async ({ page }) => {
@@ -28,10 +31,12 @@ test.describe('Placing an order', () => {
         const overview = new Overview(page);
         await overview.finishOrder();
         //user navigates to Inventory page
-        const complete = new Complete(page);
-        await complete.goBackHome();
-        //verify user is on Inventory page
-        await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
+        await test.step('THEN user placed the order successfully', async () => {
+            const complete = new Complete(page);
+            await complete.goBackHome();
+            //verify user is on Inventory page
+            await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
+        });
     })
 
 

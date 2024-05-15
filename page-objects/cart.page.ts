@@ -1,4 +1,4 @@
-import { Locator, type Page } from "playwright/test";
+import { Locator, type Page, test } from "playwright/test";
 
 export class Cart {
 
@@ -20,12 +20,14 @@ export class Cart {
     }
 
     async clickCheckout() {
-        await this.checkoutButton.click();
+        test.step(`AND user clicks 'Checkout'`, async () => {
+            await this.checkoutButton.click();
+        });
     }
 
     async clickContShopping() {
         await this.contShopBtn.click();
     }
 
-    
+
 }

@@ -8,6 +8,7 @@ import { Overview } from '../page-objects/overview.page';
 
 test.describe('checking Overview page', () => {
     test.beforeEach(async ({ page }) => {
+        test.info().annotations.push({ type: `GIVEN`, description: `user adds item to the cart and enters personal information` });
         const login = new LoginPage(page);
         await login.gotoLoginPage();
         await login.login('standard_user', 'secret_sauce');
@@ -21,18 +22,24 @@ test.describe('checking Overview page', () => {
     })
 
     test('User is able to verify Payments,Shipping, and Price', async ({ page }) => {
-        const overview = new Overview(page);
-        await expect.soft(overview.payInfoValue).toHaveText('SauceCard #31337');
-        await expect.soft(overview.shippingInfoValue).toHaveText('Free Pony Express Delivery!');
-        await expect.soft(overview.subtotalValue).toHaveText('Item total: $15.99');
-        await expect.soft(overview.taxValue).toHaveText('Tax: $1.28');
-        await expect(overview.totalValue).toHaveText('Total: $17.27');
+        await test.step('THEN user is able to verify Payments,Shipping, and Price info', async () => {
+            const overview = new Overview(page);
+            await expect.soft(overview.payInfoValue).toHaveText('SauceCard #31337');
+            await expect.soft(overview.shippingInfoValue).toHaveText('Free Pony Express Delivery!');
+            await expect.soft(overview.subtotalValue).toHaveText('Item total: $15.99');
+            await expect.soft(overview.taxValue).toHaveText('Tax: $1.28');
+            await expect(overview.totalValue).toHaveText('Total: $17.27');
+        });
     })
 
     test('User is able to click "Cancel" to go back to inventory page', async ({ page }) => {
-        const overview = new Overview(page);
-        await overview.cancelOrder();
-        await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
+        await test.step(`WHEN user clicks 'Cancel' button`, async () => {
+            const overview = new Overview(page);
+            await overview.cancelOrder();
+        });
+        await test.step(`THEN user is navigated to inventory page`, async () => {
+            await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
+        });
     })
 
 

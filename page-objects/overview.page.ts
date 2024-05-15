@@ -1,4 +1,4 @@
-import { Locator, type Page } from "playwright/test";
+import { Locator, type Page, test } from "playwright/test";
 
 export class Overview {
 
@@ -24,7 +24,9 @@ export class Overview {
     }
 
     async finishOrder() {
-        this.finishButton.click();
+        await test.step(`AND user clicks "Finish"`, async () => {
+            this.finishButton.click();
+        });
     }
 
     async cancelOrder() {
