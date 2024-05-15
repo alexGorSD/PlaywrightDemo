@@ -1,4 +1,4 @@
-import { Locator, type Page } from "playwright/test";
+import { Locator, type Page, test } from "playwright/test";
 
 export class MenuNav {
 
@@ -18,7 +18,10 @@ export class MenuNav {
     }
 
     async openMenuNav(page: Page) {
-        await this.menuNav.click();
+        await test.step(`WHEN user opens Menu Navigation`, async() =>{
+            await this.menuNav.click();
+        });
+        
     }
 
 
