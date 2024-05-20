@@ -1,4 +1,14 @@
 # PlaywrightDemo
+
+## Technologies used:
+* Language: Typescript
+* Page Object Model
+* Fixtures
+* Gherkin
+
+## Demo website:
+https://www.saucedemo.com/
+  
 ## General Setup
 * Install [Git](https://git-scm.com/downloads)
 * Install [VS Code](https://code.visualstudio.com/)
@@ -15,8 +25,8 @@ Verify they are all installed by running commands:
 * run `npm init playwright@latest`
 * run `npm install typescript`
 
-Verify all works by running a command:
-* run `npm run test`
+To run the prject:
+* `npx playwright test`
 
 ## Playwright documentation
 * https://playwright.dev/
