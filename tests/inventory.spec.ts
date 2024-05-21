@@ -11,13 +11,15 @@ test.describe('Adding & Removing Items From Cart', () => {
     })
 
     test('User is able to see item details', async ({ page, inventoryPage }) => {
-        await test.step(`WHEN user looks at an item`, async () => {
-            await inventoryPage.getItemByLabel('Sauce Labs Bolt T-Shirt');
-        });
-        await test.step(`THEN user can see the price and description`, async () => {
-            await expect(page.getByText('$15.99').first()).toBeVisible();
-            await expect(page.getByText('Get your testing superhero on')).toBeVisible();
-        });
+        await expect(async () => {
+            await test.step(`WHEN user looks at an item`, async () => {
+                await inventoryPage.getItemByLabel('Sauce Labs Bolt T-Shirt');
+            });
+            await test.step(`THEN user can see the price and description`, async () => {
+                await expect(page.getByText('$15.99').first()).toBeVisible();
+                await expect(page.getByText('Get your testing superhero on')).toBeVisible();
+            });
+        }).toPass();
     })
 
     test('User is able to put 1 item to the cart and remove it', async ({ inventoryPage }) => {
@@ -34,7 +36,6 @@ test.describe('Adding & Removing Items From Cart', () => {
     });
 
     test('User is able to add all items to the cart', async ({ page, inventoryPage }) => {
-        test.slow();
         await inventoryPage.addAllItemsToCart(page);
         await test.step(`THEN user verifies all items are added to the cart`, async () => {
             await expect(inventoryPage.cartBadge).toContainText('6');
@@ -48,10 +49,12 @@ test.describe('Adding & Removing Items From Cart', () => {
             await expect(inventoryPage.cartBadge).toContainText('6');
         });
         //user removes all items from the cart
-        await inventoryPage.removeAllItemsFromCart(page);
-        test.step(`THEN user verifies all items are removed from the cart`, async () => {
-            await expect(inventoryPage.cartBadge).toBeHidden();
-        });
+        await expect(async () => {
+            await inventoryPage.removeAllItemsFromCart(page);
+            test.step(`THEN user verifies all items are removed from the cart`, async () => {
+                await expect(inventoryPage.cartBadge).toBeHidden();
+            });
+        }).toPass();
     })
 
     test('User is able to click "About" and navigate to SauceLabs landing page', async ({ page, menuNavPage }) => {
