@@ -10,7 +10,7 @@ test.describe('Placing an order', () => {
         await loginPage.login(userName, password);
     })
 
-    test('User adds fleece jacket to the cart and checks out', async ({ page, inventoryPage, cartPage, customerInfoPage, overviewPage, completePage }) => {
+    test('User adds fleece jacket to the cart and checks out @smoke', async ({ page, inventoryPage, cartPage, customerInfoPage, overviewPage, completePage }) => {
         //user adds fleece jacket to the cart
         await inventoryPage.addItem('Sauce Labs Fleece Jacket');
         await inventoryPage.clickShoppingCart();

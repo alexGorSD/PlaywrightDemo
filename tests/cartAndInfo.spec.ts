@@ -10,7 +10,7 @@ test.describe('checking inventory & Info pages', () => {
         await inventoryPage.clickShoppingCart();
     })
 
-    test('User is able to remove item from cart', async ({ inventoryPage, cartPage }) => {
+    test('User is able to remove item from cart @smoke', async ({ inventoryPage, cartPage }) => {
         await test.step(`WHEN user removes item from cart`, async () => {
             await inventoryPage.removeFromCartBtn.click();
         });

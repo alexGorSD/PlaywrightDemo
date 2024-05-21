@@ -21,7 +21,7 @@ test.describe('checking inventory & Info pages', () => {
 
     })
 
-    test('User is not able to proceed if Last Name is missing', async ({ customerInfoPage }) => {
+    test('User is not able to proceed if Last Name is missing @smoke', async ({ customerInfoPage }) => {
         await test.step(`WHEN user enters all info except Last Name`, async () => {
             await customerInfoPage.enterCustomerInfo('Marco', '', '92036');
         });

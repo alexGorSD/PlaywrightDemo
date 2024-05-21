@@ -5,6 +5,7 @@
 * Page Object Model
 * Fixtures
 * Gherkin
+* Tags
 
 ## Demo website:
 https://www.saucedemo.com/
@@ -26,7 +27,9 @@ Verify they are all installed by running commands:
 * run `npm install typescript`
 
 To run the prject:
-* `npx playwright test`
+* `npx playwright test` (whole suite)
+* `npx playwright test --grep @smoke` (smoke test cases only)
+
 
 ## Playwright documentation
 * https://playwright.dev/
