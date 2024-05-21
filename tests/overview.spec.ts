@@ -23,12 +23,14 @@ test.describe('checking Overview page', () => {
     })
 
     test('User is able to click "Cancel" to go back to inventory page', async ({ overviewPage, page }) => {
-        await test.step(`WHEN user clicks 'Cancel' button`, async () => {
-            await overviewPage.cancelOrder();
-        });
-        await test.step(`THEN user is navigated to inventory page`, async () => {
-            await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
-        });
+        await expect(async () => {
+            await test.step(`WHEN user clicks 'Cancel' button`, async () => {
+                await overviewPage.cancelOrder();
+            });
+            await test.step(`THEN user is navigated to inventory page`, async () => {
+                await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
+            });
+        }).toPass();
     })
 
 

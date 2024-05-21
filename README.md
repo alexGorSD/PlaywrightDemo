@@ -6,6 +6,8 @@
 * Fixtures
 * Gherkin
 * Tags
+* CI GitHub Actions
+
 
 ## Demo website:
 https://www.saucedemo.com/
