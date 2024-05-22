@@ -22,6 +22,10 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    
+    strategy:
+      max-parallel: 6  # Adjust the number of parallel jobs as needed     
+
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
@@ -39,5 +43,4 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
-    strategy:
-      max-parallel: 6  # Adjust the number of parallel jobs as needed     
+
