@@ -18,11 +18,12 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+    
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    
+
     strategy:
       max-parallel: 6  # Adjust the number of parallel jobs as needed     
 
@@ -31,12 +32,21 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
+
     - name: Install dependencies
       run: npm ci
+
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
+
     - name: Run Playwright tests
-      run: npx playwright test
+      run: |
+        if [ "${{ github.event.inputs.features }}" == "smoke" ]; then
+        npx playwright test --grep @smoke --workers=6
+        else
+        npx playwright test --workers=6
+        fi
+
     - uses: actions/upload-artifact@v4
       if: always()
       with:
