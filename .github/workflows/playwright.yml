@@ -3,30 +3,17 @@ on:
   schedule:
     #run each Monday at 6am EST (11 am UTC)
     - cron: '0 11 * * 1'
-<<<<<<< HEAD
-
-  workflow_dispatch:
-    inputs:
-      testSuite:
-=======
     
   workflow_dispatch:
     inputs:
       features:
->>>>>>> 03430f33975534975d8df743995b3da2523fa418
         description: 'Test suite to run'
         required: true
         default: 'regression'
         type: choice
         options:
-<<<<<<< HEAD
+          - regression
           - smoke
-          - regression
-
-=======
-          - regression
-          - "--grep @smoke"
->>>>>>> 03430f33975534975d8df743995b3da2523fa418
   push:
     branches: [ main, master ]
   pull_request:
