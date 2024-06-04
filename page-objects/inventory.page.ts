@@ -1,8 +1,8 @@
 import { Locator, type Page, test } from "playwright/test";
+import { BasePage } from "./base.page";
 
-export class Inventory {
+export class Inventory extends BasePage {
 
-    readonly page: Page;
     shoppingCart: Locator;
     cartBadge: Locator;
     allItems: Locator;
@@ -13,7 +13,7 @@ export class Inventory {
 
 
     constructor(page: Page) {
-        this.page = page;
+        super(page);
         this.shoppingCart = page.locator('//*[@id="shopping_cart_container"]/a');
         this.cartBadge = page.locator('//*[@data-test="shopping-cart-badge"]');
         this.allItems = page.locator('[data-test="inventory-item"]');
@@ -90,7 +90,6 @@ export class Inventory {
 
         });
     };
-
 
 
 }

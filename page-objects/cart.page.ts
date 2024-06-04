@@ -1,8 +1,8 @@
 import { Locator, type Page, test } from "playwright/test";
+import { BasePage } from "./base.page";
 
-export class Cart {
+export class Cart extends BasePage {
 
-    readonly page: Page;
     checkoutButton: Locator;
     cartItem: Locator;
     cartItemDescription: Locator;
@@ -11,7 +11,7 @@ export class Cart {
 
 
     constructor(page: Page) {
-        this.page = page;
+        super(page);
         this.checkoutButton = page.getByRole("button", { name: 'Checkout' });
         this.cartItem = page.locator('//*[@class="cart_item"]');
         this.cartItemDescription = page.locator('//*[@class="inventory_item_desc"]');
