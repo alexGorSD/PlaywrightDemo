@@ -1,13 +1,13 @@
 import { Locator, type Page } from "playwright/test";
+import { BasePage } from "./base.page";
 
-export class Complete {
+export class Complete extends BasePage {
 
-    readonly page: Page;
     backHomebutton: Locator;
 
 
     constructor(page: Page) {
-        this.page = page;
+        super(page);
         this.backHomebutton = page.getByRole('button', { name: 'Back Home' });
     }
 

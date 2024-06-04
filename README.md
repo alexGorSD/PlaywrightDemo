@@ -3,7 +3,7 @@
 ## Technologies used:
 * Language: Typescript
 * Page Object Model
-* Fixtures
+* Fixtures + Base page
 * Gherkin
 * Tags
 * CI GitHub Actions

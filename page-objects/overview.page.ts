@@ -1,8 +1,8 @@
 import { Locator, type Page, test } from "playwright/test";
+import { BasePage } from "./base.page";
 
-export class Overview {
+export class Overview  extends BasePage{
 
-    private page: Page;
     finishButton: Locator;
     payInfoValue: Locator;
     shippingInfoValue: Locator;
@@ -13,7 +13,7 @@ export class Overview {
 
 
     constructor(page: Page) {
-        this.page = page;
+        super(page);
         this.finishButton = page.getByRole('button', { name: 'Finish' });
         this.payInfoValue = page.locator('//*[@data-test ="payment-info-value"]');
         this.shippingInfoValue = page.locator('//*[@data-test ="shipping-info-value"]');

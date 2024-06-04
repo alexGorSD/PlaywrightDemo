@@ -1,8 +1,8 @@
 import { Locator, type Page, test } from "playwright/test";
+import { BasePage } from "./base.page";
 
-export class CustomerInfo {
+export class CustomerInfo extends BasePage {
 
-    readonly page: Page;
     customerFirstName: Locator;
     customerLastName: Locator;
     customerZipCode: Locator;
@@ -12,7 +12,7 @@ export class CustomerInfo {
 
 
     constructor(page: Page) {
-        this.page = page;
+        super(page);
         this.customerFirstName = page.getByPlaceholder('First Name');
         this.customerLastName = page.getByPlaceholder('Last Name');
         this.customerZipCode = page.getByPlaceholder('Zip/Postal Code');
