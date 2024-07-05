@@ -1,4 +1,4 @@
-import { expect, test } from '../page-objects/fixture.page';
+import { expect, test } from 'page-objects/fixture.page';
 
 
 test.describe('checking Overview page', () => {

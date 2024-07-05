@@ -11,6 +11,11 @@
         "strictNullChecks": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-      
+        "baseUrl": "./",
+        "paths": {
+            "*": ["*"],
+            "page-objects/*": ["./page-objects/*"]
+
+        }
     }
 }
