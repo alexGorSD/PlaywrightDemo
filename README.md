@@ -6,7 +6,7 @@
 * Fixtures + Base page
 * Gherkin
 * Tags
-* CI GitHub Actions
+* CI/CD GitHub Actions
 
 
 ## Demo website:

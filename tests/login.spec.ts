@@ -1,4 +1,4 @@
-import { expect, test } from '../page-objects/fixture.page';
+import { expect, test } from 'page-objects/fixture.page';
 
 
 const commonPassword = 'secret_sauce';
