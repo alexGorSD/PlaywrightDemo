@@ -28,9 +28,16 @@ Verify they are all installed by running commands:
 * run `npm init playwright@latest`
 * run `npm install typescript`
 
-To run the prject:
+To run the project:
 * `npx playwright test` (whole suite)
 * `npx playwright test --grep @smoke` (smoke test cases only)
+
+To run the project in GitHub Actions:
+
+1. Navigate to 'Actions' tab
+2. Click 'Playwright Tests Demo' on left side
+3. Click 'Run workflow'
+4. Select Regression or Smoke test suite
 
 
 ## Playwright documentation

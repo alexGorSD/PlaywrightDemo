@@ -1,8 +1,8 @@
 name: Playwright Tests Demo
 on:
   schedule:
-    #run each Monday at 6am EST (11 am UTC)
-    - cron: '0 11 * * 1'
+    #run each Monday at 5am EST (10 am UTC)
+    - cron: '0 10 * * 1'
     
   workflow_dispatch:
     inputs:

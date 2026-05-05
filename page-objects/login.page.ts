@@ -16,7 +16,7 @@ export class LoginPage extends BasePage {
     }
 
     async gotoLoginPage() {
-        await this.page.goto('https://www.saucedemo.com/');
+        await this.page.goto('https://www.saucedemo.com');
     }
 
     async login(username: string, password: string) {
